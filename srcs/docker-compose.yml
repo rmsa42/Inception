@@ -1,0 +1,6 @@
+services:
+  nginx:
+    image: mynginx
+    build: requirements/nginx
+    ports:
+      - "80:80"
