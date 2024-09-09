@@ -1,5 +1,7 @@
 FROM debian:bullseye
 
+COPY nginx.conf /etc/nginx/conf.d/nginx.conf
+
 RUN apt-get update \
    && apt-get -y install nginx \
    && apt-get -y install procps \
@@ -7,4 +9,4 @@ RUN apt-get update \
 
 EXPOSE 80
 
-CMD ["/usr/sbin/nginx"]
+CMD ["nginx"] 

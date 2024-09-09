@@ -4,3 +4,5 @@ services:
     build: requirements/nginx
     ports:
       - "80:80"
+    volumes:
+      - /home/rumachad/data:/var
