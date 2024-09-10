@@ -3,6 +3,13 @@ services:
     image: mynginx
     build: requirements/nginx
     ports:
-      - "80:80"
+      - "8080:80"
+    volumes_from:
+      - wordpress
+  wordpress:
+    image: worpress
+    build: requirements/wordpress
+    expose:
+      - "9000"
     volumes:
-      - /home/rumachad/data:/var
+      - /home/rumachad/data:/var/www/html
