@@ -4,8 +4,11 @@ services:
     build: requirements/nginx
     ports:
       - "8080:80"
-    volumes_from:
-      - wordpress
+    volumes:
+      - /home/rumachad/data:/var/www/html
+      - /home/rumachad/logs:/var/log/nginx
+    networks:
+      - internal
   wordpress:
     image: worpress
     build: requirements/wordpress
@@ -13,3 +16,9 @@ services:
       - "9000"
     volumes:
       - /home/rumachad/data:/var/www/html
+      - /home/rumachad/logsWord:/var/log/fpm-php.www.log
+    networks:
+      - internal
+networks:
+  internal:
+    driver: bridge

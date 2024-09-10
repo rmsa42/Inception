@@ -1,12 +1,12 @@
 FROM debian:bullseye
 
-COPY nginx.conf /etc/nginx/conf.d/nginx.conf
+COPY nginx.conf /etc/nginx/conf.d
 
 RUN apt-get update \
    && apt-get -y install nginx \
    && apt-get -y install openssl \
-   && echo "daemon off;" >> /etc/nginx/nginx.conf
+   && chmod -R 755 /var/www/html
 
-EXPOSE 443
+EXPOSE 80
 
-CMD ["nginx"] 
+CMD ["nginx", "-g", "daemon off;"] 
