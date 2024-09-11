@@ -12,11 +12,8 @@ services:
   wordpress:
     image: worpress
     build: requirements/wordpress
-    expose:
-      - "9000"
     volumes:
       - /home/rumachad/data:/var/www/html
-      - /home/rumachad/logsWord:/var/log/fpm-php.www.log
     networks:
       - internal
 networks:

@@ -1,16 +1,16 @@
 FROM debian:bullseye
 
 RUN apt-get update \
+    && apt-get -y install systemd \
     && apt-get -y install curl \
-    && apt-get -y install php7.4-fpm \
-    && curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar \
-    && chmod +x wp-cli.phar \
-    && mv wp-cli.phar /usr/local/bin/wp-cli \
-    && mkdir wordpress \
-    && wp-cli --allow-root --path=wordpress core download
+    && apt-get -y install php7.4-fpm
 
+COPY ./www.conf /etc/php/7.4/fpm/pool.d/www.conf
+COPY ./script.sh /
+
+RUN chmod +x script.sh
 RUN mkdir /run/php
 
 EXPOSE 9000
 
-CMD ["php-fpm7.4", "-F"]
+CMD ["./script.sh"]
