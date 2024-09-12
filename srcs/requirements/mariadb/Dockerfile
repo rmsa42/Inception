@@ -1,6 +1,11 @@
 FROM debian:bullseye
 
 RUN apt-get update \
-    && apt-get install -y mariadb-server
+    && apt-get -y install mariadb-server mariadb-client mariadb-backup
 
-CMD ["bash"]
+COPY ./script.sh /
+RUN chmod +x script.sh
+
+EXPOSE 3306
+
+CMD ["bash", "./script.sh"]

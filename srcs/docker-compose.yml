@@ -5,7 +5,7 @@ services:
     ports:
       - "8080:80"
     volumes:
-      - /home/rumachad/data:/var/www/html
+      - /home/rumachad/data/wordpress:/var/www/html
       - /home/rumachad/logs:/var/log/nginx
     networks:
       - internal
@@ -13,7 +13,14 @@ services:
     image: worpress
     build: requirements/wordpress
     volumes:
-      - /home/rumachad/data:/var/www/html
+      - /home/rumachad/data/wordpress:/var/www/html
+    networks:
+      - internal
+  mariadb:
+    image: mariadb
+    build: requirements/mariadb
+    volumes:
+      - /home/rumachad/data/db:/var/lib/mysql
     networks:
       - internal
 networks:
