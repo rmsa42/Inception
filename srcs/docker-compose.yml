@@ -2,6 +2,8 @@ services:
   nginx:
     image: mynginx
     build: requirements/nginx
+    depends_on:
+      - wordpress
     ports:
       - "8080:80"
     volumes:
@@ -12,10 +14,14 @@ services:
   wordpress:
     image: worpress
     build: requirements/wordpress
+    depends_on:
+      - mariadb
     volumes:
       - /home/rumachad/data/wordpress:/var/www/html
     networks:
       - internal
+    env_file:
+      - .env
   mariadb:
     image: mariadb
     build: requirements/mariadb
@@ -23,6 +29,8 @@ services:
       - /home/rumachad/data/db:/var/lib/mysql
     networks:
       - internal
+    env_file:
+      - .env
 networks:
   internal:
     driver: bridge
