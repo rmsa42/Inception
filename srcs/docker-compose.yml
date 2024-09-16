@@ -1,11 +1,11 @@
 services:
   nginx:
-    image: mynginx
+    image: nginx
     build: requirements/nginx
     depends_on:
       - wordpress
     ports:
-      - "8080:80"
+      - "80:80"
     volumes:
       - /home/rumachad/data/wordpress:/var/www/html
       - /home/rumachad/logs:/var/log/nginx
