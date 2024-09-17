@@ -2,8 +2,7 @@
 
 chown -R mysql:mysql /var/lib/mysql
 mariadb-install-db
-mysqld_safe &
-sleep 5
+mysqld_safe & sleep 3
 mysql -u root -e "
 	CREATE DATABASE IF NOT EXISTS ${DB_NAME};
 	CREATE USER IF NOT EXISTS ${DB_USER}@'%' IDENTIFIED BY '${DB_PASSWORD}';
