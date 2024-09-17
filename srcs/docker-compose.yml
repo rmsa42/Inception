@@ -5,7 +5,7 @@ services:
     depends_on:
       - wordpress
     ports:
-      - "80:80"
+      - "443:443"
     volumes:
       - /home/rumachad/data/wordpress:/var/www/html
       - /home/rumachad/logs:/var/log/nginx

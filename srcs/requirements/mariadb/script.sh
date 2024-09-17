@@ -1,7 +1,7 @@
 #!/bin/bash
-set -x
 
 chown -R mysql:mysql /var/lib/mysql
+mariadb-install-db
 mysqld_safe &
 sleep 5
 mysql -u root -e "
