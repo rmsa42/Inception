@@ -10,7 +10,15 @@ chown -R www-data:www-data /var/www
 su www-data -s /bin/bash -c "
 	cd /var/www/html
 	wp core download
-	wp config create --dbname=${DB_NAME} --dbuser=${DB_USER} --dbpass=${DB_PASSWORD} --dbhost=${DB_HOST}
-	wp core install --url=${WP_URL} --title='${WP_TITLE}' --admin_user=${WP_ADMIN_USER} --admin_password=${WP_ADMIN_PASS} --admin_email=${WP_ADMIN_EMAIL}
+	wp config create \
+		--dbname=${DB_NAME} \
+		--dbuser=${DB_USER} \
+		--dbpass=$(head -n 1 ${DB_PASSWORD}) \
+		--dbhost=${DB_HOST}
+	wp core install --url=${WP_URL} \
+		--title='${WP_TITLE}' \
+		--admin_user=${WP_ADMIN_USER} -\
+		-admin_password=$(head -n 1 ${WP_ADMIN_PASS}) \
+		--admin_email=${WP_ADMIN_EMAIL}
 "
 exec php-fpm7.4 -F

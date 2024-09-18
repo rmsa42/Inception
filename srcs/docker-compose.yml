@@ -1,6 +1,7 @@
 services:
   nginx:
     image: nginx
+    container_name: nginx
     build: requirements/nginx
     depends_on:
       - wordpress
@@ -13,6 +14,7 @@ services:
       - internal
   wordpress:
     image: worpress
+    container_name: wordpress
     build: requirements/wordpress
     depends_on:
       - mariadb
@@ -22,8 +24,12 @@ services:
       - internal
     env_file:
       - .env
+    secrets:
+      - db_pass
+      - wp_pass
   mariadb:
     image: mariadb
+    container_name: mariadb
     build: requirements/mariadb
     volumes:
       - /home/rumachad/data/db:/var/lib/mysql
@@ -31,6 +37,13 @@ services:
       - internal
     env_file:
       - .env
+    secrets:
+      - db_pass
 networks:
   internal:
     driver: bridge
+secrets:
+  db_pass:
+    file: ../secrets/db_password
+  wp_pass:
+    file: ../secrets/wp_password
