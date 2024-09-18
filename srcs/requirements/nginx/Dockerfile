@@ -7,8 +7,5 @@ RUN apt-get update \
    && rm /etc/nginx/sites-enabled/default
 
 COPY default.conf /etc/nginx/conf.d/ng.conf
-COPY script.sh .
 
-RUN chmod +x script.sh
-
-CMD ["bash", "./script.sh"]
+CMD ["nginx", "-g", "daemon off;"]

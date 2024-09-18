@@ -12,21 +12,26 @@ services:
       - /home/rumachad/logs:/var/log/nginx
     networks:
       - internal
+    secrets:
+      - ssl_key
+      - ssl_crt
+    restart: on-failure
   wordpress:
     image: worpress
     container_name: wordpress
     build: requirements/wordpress
-    depends_on:
-      - mariadb
     volumes:
       - /home/rumachad/data/wordpress:/var/www/html
     networks:
       - internal
+    depends_on:
+      - mariadb
     env_file:
       - .env
     secrets:
       - db_pass
       - wp_pass
+    restart: on-failure
   mariadb:
     image: mariadb
     container_name: mariadb
@@ -39,6 +44,7 @@ services:
       - .env
     secrets:
       - db_pass
+    restart: on-failure
 networks:
   internal:
     driver: bridge
@@ -47,3 +53,7 @@ secrets:
     file: ../secrets/db_password
   wp_pass:
     file: ../secrets/wp_password
+  ssl_key:
+    file: ../secrets/tls/localhost.key
+  ssl_crt:
+    file: ../secrets/tls/localhost.crt
