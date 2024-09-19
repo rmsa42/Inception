@@ -8,4 +8,5 @@ RUN apt-get update \
 
 COPY default.conf /etc/nginx/conf.d/ng.conf
 
-CMD ["nginx", "-g", "daemon off;"]
+ENTRYPOINT ["nginx"]
+CMD ["-g", "daemon off;"]

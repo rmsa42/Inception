@@ -1,7 +1,6 @@
 FROM debian:bullseye
 
 RUN apt-get update \
-    && apt-get -y install systemd \
     && apt-get -y install curl \
     && apt-get -y install php7.4-fpm \
     && apt-get -y install php-mysql
