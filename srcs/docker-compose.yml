@@ -30,7 +30,8 @@ services:
       - .env
     secrets:
       - db_pass
-      - wp_pass
+      - wp_admin_pass
+      - wp_user_pass
     restart: on-failure
   mariadb:
     image: mariadb
@@ -51,8 +52,10 @@ networks:
 secrets:
   db_pass:
     file: ../secrets/db_password
-  wp_pass:
+  wp_admin_pass:
     file: ../secrets/wp_password
+  wp_user_pass:
+    file: ../secrets/wp_user_password
   ssl_key:
     file: ../secrets/tls/localhost.key
   ssl_crt:

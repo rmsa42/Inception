@@ -1,5 +1,4 @@
 #!/bin/bash
-set -x
 
 curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 chmod +x wp-cli.phar
@@ -20,10 +19,10 @@ if [ ! -f "./wp-config.php" ]; then
 		--admin_password=$(head -n 1 ${WP_ADMIN_PASS}) \
 		--admin_email=${WP_ADMIN_EMAIL}
 	wp user create \
-		UserTest \
-		UserTest@example.com \
-		--role=contributor \
-		--user_pass=test
+		${WP_USER_USER} \
+		${WP_USER_EMAIL} \
+		--role=${WP_USER_ROLE} \
+		--user_pass=$(head -n 1 ${WP_USER_PASS})
 fi
 "
 exec php-fpm7.4 -F

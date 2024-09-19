@@ -1,8 +1,9 @@
 #!/bin/bash
-set -x
 
 chown -R mysql:mysql /var/lib/mysql
-mariadb-install-db
+if [ ! "$(ls -A /var/lib/mysql)" ]; then
+	mariadb-install-db
+fi
 mysqld_safe & sleep 3
 mysql -u root -e "
 	CREATE DATABASE IF NOT EXISTS ${DB_NAME};
