@@ -6,6 +6,7 @@ mv wp-cli.phar /usr/local/bin/wp
 cd /var/www/html
 chown -R www-data:www-data /var/www
 su www-data -s /bin/bash -c "
+sleep 5
 wp core download
 if [ ! -f "./wp-config.php" ]; then
 	wp config create \
