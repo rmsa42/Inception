@@ -14,7 +14,7 @@ services:
     secrets:
       - ssl_key
       - ssl_crt
-    restart: on-failure
+    restart: always
   wordpress:
     image: worpress
     container_name: wordpress
@@ -31,7 +31,7 @@ services:
       - db_pass
       - wp_admin_pass
       - wp_user_pass
-    restart: on-failure
+    restart: always
   mariadb:
     image: mariadb
     container_name: mariadb
@@ -44,7 +44,7 @@ services:
       - .env
     secrets:
       - db_pass
-    restart: on-failure
+    restart: always
 
 volumes:
   mariadb_db:
