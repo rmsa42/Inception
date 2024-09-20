@@ -8,8 +8,7 @@ services:
     ports:
       - "443:443"
     volumes:
-      - /home/rumachad/data/wordpress:/var/www/html
-      - /home/rumachad/logs:/var/log/nginx
+      - wordpress_files:/var/www/html
     networks:
       - internal
     secrets:
@@ -21,7 +20,7 @@ services:
     container_name: wordpress
     build: requirements/wordpress
     volumes:
-      - /home/rumachad/data/wordpress:/var/www/html
+      - wordpress_files:/var/www/html
     networks:
       - internal
     depends_on:
@@ -38,7 +37,7 @@ services:
     container_name: mariadb
     build: requirements/mariadb
     volumes:
-      - /home/rumachad/data/db:/var/lib/mysql
+      - mariadb_db:/var/lib/mysql
     networks:
       - internal
     env_file:
@@ -46,9 +45,25 @@ services:
     secrets:
       - db_pass
     restart: on-failure
+
+volumes:
+  mariadb_db:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/rumachad/data/db
+      o: bind
+  wordpress_files:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/rumachad/data/wordpress
+      o: bind
+
 networks:
   internal:
     driver: bridge
+
 secrets:
   db_pass:
     file: ../secrets/db_password
