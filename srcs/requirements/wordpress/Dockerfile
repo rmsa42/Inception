@@ -13,4 +13,4 @@ RUN mkdir /run/php
 
 EXPOSE 9000
 
-CMD ["bash", "./script.sh"]
+ENTRYPOINT ["./script.sh"]
