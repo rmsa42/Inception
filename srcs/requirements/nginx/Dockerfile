@@ -6,7 +6,7 @@ RUN apt-get update \
    && chmod -R 777 /var/www/html \
    && rm /etc/nginx/sites-enabled/default
 
-COPY default.conf /etc/nginx/conf.d/ng.conf
+COPY ./conf/default.conf /etc/nginx/conf.d/ng.conf
 
 ENTRYPOINT ["nginx"]
 CMD ["-g", "daemon off;"]
