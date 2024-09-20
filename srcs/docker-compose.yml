@@ -16,7 +16,7 @@ services:
       - ssl_crt
     restart: always
   wordpress:
-    image: worpress
+    image: wordpress
     container_name: wordpress
     build: requirements/wordpress
     volumes:
